@@ -52,7 +52,8 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   uses-material-design: true
-
+  assets:
+    - media/bmi.png
   fonts:
     - family: Poppins
       fonts:
@@ -96,5 +97,3 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-assets:
-  - media/bmi.jpeg

@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, deprecated_member_use, sized_box_for_whitespace, use_key_in_widget_constructors, library_private_types_in_public_api
 
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -30,7 +32,16 @@ class _MyHomePageState extends State<MyHomePage> {
   var ftController = TextEditingController();
   var inController = TextEditingController();
   var result = "";
-  var bgColor;
+  var bgColor = Color.fromARGB(137, 229, 255, 200);
+  var bggrad = RadialGradient(
+    center: Alignment.topLeft,
+    radius: 2.0,
+    colors: [
+      Color.fromARGB(126, 255, 190, 136), // Start color
+      Colors.white, // End color
+    ],
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +64,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body: Container(
-        color: bgColor,
+        decoration: BoxDecoration(
+          gradient: bggrad,
+        ),
         child: SingleChildScrollView(
           child: Container(
             child: Center(
@@ -62,26 +75,32 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    SizedBox(
+                      height: 20,
+                    ),
                     Text(
-                      "BMI Calculator",
+                      "Developed by Saim",
                       style: TextStyle(
-                        fontSize: 34,
+                        fontSize: 24,
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w800,
                         color: Colors.black,
                       ),
                     ),
+                     SizedBox(
+                      height: 30,
+                    ),
                     Text(
-                      "Developed by Saim",
+                      "Enter the following details to calculate BMI",
                       style: TextStyle(
                         fontSize: 14,
                         fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w400,
                         color: Colors.black,
                       ),
                     ),
                     SizedBox(
-                      height: 40,
+                      height: 10,
                     ),
                     TextField(
                       controller: wtController,
@@ -140,11 +159,11 @@ class _MyHomePageState extends State<MyHomePage> {
                               (doubleHeightInMetre * doubleHeightInMetre);
                           result = "Your BMI is: ${bmi.toStringAsFixed(2)}";
                           if (bmi > 25) {
-                            bgColor = Colors.red.shade100;
+                            bgColor = Colors.redAccent;
                           } else if (bmi < 18.5) {
-                            bgColor = Colors.yellow.shade100;
+                            bgColor = Colors.yellowAccent;
                           } else {
-                            bgColor = Colors.green.shade100;
+                            bgColor = Colors.greenAccent;
                           }
                           setState(() {
                             result = result;
@@ -177,16 +196,16 @@ class _MyHomePageState extends State<MyHomePage> {
                     Text(
                       result,
                       style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
+                        fontSize: 28,
+                        fontWeight: FontWeight.w600,
                         color: Colors.black,
                         fontFamily: 'Poppins',
                       ),
                     ),
-                    Image.network(
-                      'https://img.freepik.com/free-vector/flat-woman-diet-control-normal-weight-with-bmi-scale_88138-933.jpg?t=st=1715589340~exp=1715592940~hmac=ed2ce246f42ea15daa654c91ee8c2b2ea2c86a98a5b2927b73da5d59612940a7&w=1380',
-                      height: 300,
-                      width: 600,
+                    Image.asset(
+                      'media/bmi.png',
+                      width: 400,
+                      height: 230,
                     ),
                   ],
                 ),
