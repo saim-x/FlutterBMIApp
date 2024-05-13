@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, deprecated_member_use, sized_box_for_whitespace, use_key_in_widget_constructors, library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 void main() {
   runApp(MyApp());
 }
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'My App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.orange,
       ),
       home: MyHomePage(),
     );
@@ -29,7 +29,7 @@ class _MyHomePageState extends State<MyHomePage> {
   var wtController = TextEditingController();
   var ftController = TextEditingController();
   var inController = TextEditingController();
-  var result = "hello";
+  var result = "";
   var bgColor;
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.black,
         elevation: 0, // Remove the shadow
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body: Container(
-        color: Colors.amber,
+        color: bgColor,
         child: Center(
           child: Container(
             width: 300,
@@ -61,12 +61,13 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'BMI',
+                  "BMI",
                   style: TextStyle(
-                    fontSize: 34,
+                    fontSize: 15,
                     fontWeight: FontWeight.w500,
-                    color: Colors.blue,
+                    color: Colors.black,
                   ),
+                  
                 ),
                 SizedBox(
                   height: 40,
@@ -127,7 +128,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       var bmi = doubleWeigtinKg /
                           (doubleHeightInMetre * doubleHeightInMetre);
                       result = "Your BMI is: ${bmi.toStringAsFixed(2)}";
-
+                      if (bmi > 25) {
+                        bgColor = Colors.red.shade100;
+                      }
+                      else if(bmi < 18.5){
+                        bgColor = Colors.yellow.shade100;
+                      }
+                      else{
+                        bgColor = Colors.green.shade100;
+                      }
                       setState(() {
                         result = result;
                       });
@@ -135,7 +144,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                   child: Text('Calculate BMI'),
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.blue, // Set the background color
+                    primary: Colors.black, // Set the background color
                     onPrimary: Colors.white, // Set the text color
                     textStyle: TextStyle(
                       fontSize: 18,
