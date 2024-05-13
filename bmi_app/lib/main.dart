@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last, deprecated_member_use, sized_box_for_whitespace, use_key_in_widget_constructors, library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
 
@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'My App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -19,10 +20,17 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
   var wtController = TextEditingController();
   var ftController = TextEditingController();
   var inController = TextEditingController();
+  var result = "hello";
+  var bgColor;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,62 +52,117 @@ class MyHomePage extends StatelessWidget {
           ),
         ),
       ),
-      body: Center(
-        child: Container(
-          width: 300,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              
-              Text(
-                'BMI',
-                style: TextStyle(
-                  fontSize: 34,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.blue,
+      body: Container(
+        color: Colors.amber,
+        child: Center(
+          child: Container(
+            width: 300,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'BMI',
+                  style: TextStyle(
+                    fontSize: 34,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.blue,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              TextField(
-                controller: wtController,
-                decoration: InputDecoration(
-                  hintText: 'Enter Weight in kg',
-                  labelText: 'Weight in kg',
-                  prefixIcon: Icon(Icons.accessibility),
+                SizedBox(
+                  height: 40,
                 ),
-                keyboardType: TextInputType.number,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              TextField(
-                controller: ftController,
-                decoration: InputDecoration(
-                  hintText: 'Enter Height in ft',
-                  labelText: 'Height in ft',
-                  prefixIcon: Icon(Icons.height),
+                TextField(
+                  controller: wtController,
+                  decoration: InputDecoration(
+                    hintText: 'Enter Weight in kg',
+                    labelText: 'Weight in kg',
+                    prefixIcon: Icon(Icons.accessibility),
+                  ),
+                  keyboardType: TextInputType.number,
                 ),
-                keyboardType: TextInputType.number,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              TextField(
-                controller: inController,
-                decoration: InputDecoration(
-                  labelText: "Height in inches",
-                  hintText: "Enter Height in inches",
-                  prefixIcon: Icon(Icons.height_outlined),
+                SizedBox(
+                  height: 10,
                 ),
-                keyboardType: TextInputType.number,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(onPressed: (){}, child: child)
-            ],
+                TextField(
+                  controller: ftController,
+                  decoration: InputDecoration(
+                    hintText: 'Enter Height in ft',
+                    labelText: 'Height in ft',
+                    prefixIcon: Icon(Icons.height),
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                  controller: inController,
+                  decoration: InputDecoration(
+                    labelText: "Height in inches",
+                    hintText: "Enter Height in inches",
+                    prefixIcon: Icon(Icons.height_outlined),
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    // Calculate BMI
+                    var weight = wtController.text.toString();
+                    var feet = ftController.text.toString();
+                    var inches = inController.text.toString();
+                    if (weight == "" || feet == "" || inches == "") {
+                      setState(() {
+                        result = "Please enter all the fields";
+                      });
+                    } else {
+                      // Calculate BMI
+                      var doubleheightinInches =
+                          (double.parse(feet) * 12) + double.parse(inches);
+                      var doubleheightinCms = doubleheightinInches * 2.54;
+                      var doubleHeightInMetre = doubleheightinCms / 100;
+                      var doubleWeigtinKg = double.parse(weight);
+                      var bmi = doubleWeigtinKg /
+                          (doubleHeightInMetre * doubleHeightInMetre);
+                      result = "Your BMI is: ${bmi.toStringAsFixed(2)}";
+
+                      setState(() {
+                        result = result;
+                      });
+                    }
+                  },
+                  child: Text('Calculate BMI'),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.blue, // Set the background color
+                    onPrimary: Colors.white, // Set the text color
+                    textStyle: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      vertical: 12,
+                      horizontal: 24,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  result,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
