@@ -185,7 +185,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     Image.network(
                       'https://img.freepik.com/free-vector/flat-woman-diet-control-normal-weight-with-bmi-scale_88138-933.jpg?t=st=1715589340~exp=1715592940~hmac=ed2ce246f42ea15daa654c91ee8c2b2ea2c86a98a5b2927b73da5d59612940a7&w=1380',
-                      height: 100,
+                      height: 300,
                       width: 600,
                     ),
                   ],
