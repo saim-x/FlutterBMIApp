@@ -27,7 +27,7 @@ To run this Flutter app on your local machine, follow these steps:
 2. Clone this repository to your local machine:
 
    ```bash
-   git clone https://github.com/your-username/bmi_calculator_app.git
+   git clone https://github.com/saim-x/bmi_calculator_app.git
    ```
 
 3. Navigate to the project directory:
@@ -61,6 +61,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ```
 
-Replace `your-username` with your actual GitHub username in the repository URL provided in the "Getting Started" section.
-
-Feel free to customize this README.md file further to include additional information about your project, such as installation instructions, usage guidelines, or any other relevant details.
